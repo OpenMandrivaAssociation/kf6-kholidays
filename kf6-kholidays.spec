@@ -1,6 +1,6 @@
 %define libname %mklibname KF6Holidays
 %define devname %mklibname KF6Holidays -d
-%define git 20231014
+%define git 20231023
 
 Name: kf6-kholidays
 Version: 5.240.0
