@@ -36,9 +36,17 @@ BuildRequires: cmake(Qt6)
 BuildRequires: cmake(Qt6QuickTest)
 BuildRequires: bison
 BuildRequires: flex
+BuildRequires: flex-devel
 Requires: %{libname} = %{EVRD}
 BuildSystem:	cmake
 BuildOption:	-DBUILD_QCH:BOOL=ON
+
+%prep -a
+	# Cooker flex defines yyunput() as a one-argument macro and generates
+	# yyread/yyunput_r against its own FlexLexer.h. Upstream still ships an
+	# older header, and this directory is on the include path ahead of
+	# /usr/include, so the scanner has to see the system header.
+	cp -f %{_includedir}/FlexLexer.h src/parsers/plan2/FlexLexer.h
 
 %description
 Library to assist determining when holidays occur
